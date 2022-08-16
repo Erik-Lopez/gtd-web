@@ -1,0 +1,23 @@
+body {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.links {
+	align-items: center;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	row-gap: 20px;
+	width: 100%;
+}
+
+.links__link {	
+	background-color: var(--button-color);
+	border-radius: var(--roundedness);
+	color: var(--text-color);
+	font-size: 3em;
+	padding: var(--button-padding);
+	text-decoration: none;
+}
