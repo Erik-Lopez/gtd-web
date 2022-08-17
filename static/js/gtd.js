@@ -1,3 +1,9 @@
+document.addEventListener("DOMContentLoaded", () => {
+	document.querySelectorAll(".window__close-button").forEach(button => {
+		button.onclick = hideWindow;
+	});
+});
+
 function hideWindow(e)
 {
 	let button = e.target;
@@ -10,9 +16,3 @@ function hideWindow(e)
 	else if (panel.style.display == "")
 		panel.style.display = "none";
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-	document.querySelectorAll(".window__close-button").forEach(button => {
-		button.onclick = hideWindow;
-	});
-});
