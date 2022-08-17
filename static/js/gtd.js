@@ -37,7 +37,6 @@ function showEntryAdditionBox(e) {
 	panel.scrollTo(0, panel.scrollHeight);
 
 	panel.querySelector(".window__input").focus();
-	panel.querySelector(".window__entry-edit").onclick = entryEdit;
 	panel.querySelector(".window__entry-delete").onclick = entryDelete;
 	panel.querySelector(".window__accept").onclick = entryAdd;
 	panel.querySelector(".window__decline").onclick = hideEntryAdditionBox;
@@ -55,6 +54,11 @@ function entryAdd(e) {
 	let entry = entryCreate(content, false);
 
 	panel.insertBefore(entry, entryBox.nextSibling);
+	entryBox.remove();
+}
+
+function entryDelete(e) {
+	let entryBox = e.target.parentNode;
 	entryBox.remove();
 }
 
