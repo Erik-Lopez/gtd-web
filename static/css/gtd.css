@@ -76,7 +76,9 @@ body {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
+	justify-content: space-between;
 	gap: 2%;
+	white-space: pre;
 }
 
 .window__entry-create {
@@ -94,16 +96,34 @@ body {
 	width: 100%;
 }
 
+.window__accept, .window__decline, .window__entry-delete, .window__entry-edit {
+	height: 100%;
+	width: 40px;
+}
+
 .window__accept {
 	background-color: lightgreen;
 	border-color: lightgreen;
-	height: 100%;
-	width: 40px;
 }
 
 .window__decline {
 	background-color: pink;
 	border-color: pink;
+}
+
+.window__entry-content {
+	margin: 0;
+}
+
+.window__entry-delete, .window__entry-edit {
+	background-color: cyan;
+	border-color: cyan;
 	height: 100%;
-	width: 40px;
+}
+
+.window__spacing {
+	display: flex;
+	flex-direction: row;
+	gap: 10%;
+	height: 100%;
 }
