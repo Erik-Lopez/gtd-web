@@ -24,3 +24,13 @@ async def about_me():
     with open("./static/about.html", "r") as f:
         content = f.read()
         return HTMLResponse(content)
+
+@app.get(
+    path = "/gtd",
+    response_class = HTMLResponse,
+    summary = "GTD main page."
+)
+async def gtd():
+    with open("./static/gtd.html", "r") as f:
+        content = f.read()
+        return HTMLResponse(content)
