@@ -9,24 +9,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function toggleWindowVisibility(e)
 {
-	let button = e.target;
-	let panel = button.parentNode.parentNode.querySelector("div[class='window__panel']");
+	let panel = e.target.parentNode.parentNode.querySelector("div[class='window__panel']");
 
-	if (panel.style.display == "none")
-		panel.style.display = "flex";
-	else if (panel.style.display == "flex")
-		panel.style.display = "none";
-	else if (panel.style.display == "")
-		panel.style.display = "none";
+	switch (panel.style.display) {
+		case "none":
+			panel.style.display = "flex";
+			break;
+		case "flex":
+			panel.style.display = "none";
+			break;
+		case "":
+			panel.style.display = "none";
+			break;
+	}
 }
 
 function showAddEntryBox(e) {
 	let button = e.target;
 	let panel = button.parentNode;
 
-	if (isAlreadyWriting(panel)) {
+	if (isAlreadyWriting(panel))
 		return;
-	}
 
 	let entry = createEntry(`
 		<textarea class='window__input'></textarea>
@@ -39,21 +42,17 @@ function showAddEntryBox(e) {
 
 	panel.querySelector(".window__input").focus();
 	panel.querySelector(".window__accept").onclick = addEntry;
-	panel.querySelector(".window__decline").onclick = declineEntry;
+	panel.querySelector(".window__decline").onclick = hideEntryAdditionBox;
 }
 
-function declineEntry(e) { hideAddEntryBox(e); }
-
-function hideAddEntryBox(e) {
+function hideEntryAdditionBox(e) {
 	let entryBox = e.target.parentNode;
 	entryBox.remove();
 }
 
 function addEntry(e) {
 	let entryBox = e.target.parentNode;
-	console.log(e)
 	let panel = entryBox.parentNode;
-
 	let content = entryBox.querySelector('.window__input').value;
 	let entry = createEntry(content)
 
@@ -61,25 +60,21 @@ function addEntry(e) {
 	entryBox.remove();
 }
 
-function createEntry(innerHTML) {
-	return createHTML(`
-	<div class='window__entry'>
-		${innerHTML}
-	</div>
-	`);
-}
-
 function createHTML(htmlStr) {
-	let frag = document.createDocumentFragment(),
-		temp = document.createElement('div');
-
+	let frag = document.createDocumentFragment();
+	let temp = document.createElement('div');
 	temp.innerHTML = htmlStr;
-	while (temp.firstChild) {
+
+	while (temp.firstChild)
 		frag.appendChild(temp.firstChild);
-    	}
+
 	return frag;
 }
 
 function isAlreadyWriting(panel) {
 	return panel.outerHTML.includes("window__input");
+}
+
+function createEntry(innerHTML) {
+	return createHTML(`<div class='window__entry'>${innerHTML}</div>`);
 }
