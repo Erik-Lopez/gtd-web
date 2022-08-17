@@ -10,8 +10,8 @@ function hideWindow(e)
 	let panel = button.parentNode.parentNode.querySelector("div[class='window__panel']");
 
 	if (panel.style.display == "none")
-		panel.style.display = "flex";
-	else if (panel.style.display == "flex")
+		panel.style.display = "block";
+	else if (panel.style.display == "block")
 		panel.style.display = "none";
 	else if (panel.style.display == "")
 		panel.style.display = "none";
