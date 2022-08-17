@@ -96,13 +96,4 @@ function entryCreate(innerHTML, editable=false) {
 	content += `</div>`
 
 	return createHTML(content);
-
-	/*return createHTML(`<div class="window__entry">
-		<p class="window__entry-content">${innerHTML}</p>
-		<div class="window__spacing">
-			<button class="window__entry-delete"></button>
-			<button class="window__entry-edit"></button>
-		</div>
-	</div>`);*/
-	//return createHTML(`<div class='window__entry'>${innerHTML}</div>`);
 }
