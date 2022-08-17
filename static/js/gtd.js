@@ -28,6 +28,7 @@ function showEntryAdditionBox(e) {
 	let button = e.target;
 	let panel = button.parentNode;
 
+	// TODO: ¿Quitar esto? No permitirá múltiples ediciones simultáneas.
 	if (isAlreadyWriting(panel))
 		return;
 
@@ -37,9 +38,6 @@ function showEntryAdditionBox(e) {
 	panel.scrollTo(0, panel.scrollHeight);
 
 	panel.querySelector(".window__input").focus();
-	panel.querySelector(".window__entry-delete").onclick = entryDelete;
-	panel.querySelector(".window__accept").onclick = entryAdd;
-	panel.querySelector(".window__decline").onclick = hideEntryAdditionBox;
 }
 
 function hideEntryAdditionBox(e) {
@@ -58,7 +56,18 @@ function entryAdd(e) {
 }
 
 function entryDelete(e) {
-	let entryBox = e.target.parentNode;
+	let entryBox = e.target.parentNode.parentNode;
+	entryBox.remove();
+}
+
+function entryEdit(e) {
+	let entryBox = e.target.parentNode.parentNode;
+	let panel = entryBox.parentNode;
+	let entryAdditionButton = panel.querySelector(".window__entry-create");
+	let content = entryBox.querySelector(".window__entry-content").innerHTML;
+
+	let editableEntryBox = entryCreate(content, true);
+	panel.insertBefore(editableEntryBox, entryAdditionButton);
 	entryBox.remove();
 }
 
@@ -81,19 +90,29 @@ function entryCreate(innerHTML, editable=false) {
 	let content = `<div class="window__entry">`
 	if (editable) {
 		content += `
-				<textarea class='window__input'></textarea>
+				<textarea class='window__input'>${innerHTML}</textarea>
 				<button class='window__accept'></button>
 				<button class='window__decline'></button>`;
 	} else {
 		content += `
 				<p class="window__entry-content">${innerHTML}</p>
 				<div class="window__spacing">
-					<button class="window__entry-delete"></button>
 					<button class="window__entry-edit"></button>
+					<button class="window__entry-delete"></button>
 				</div>`;
 	}
 
 	content += `</div>`
 
-	return createHTML(content);
+	let entry = createHTML(content);
+
+	if (editable) {
+		entry.querySelector(".window__accept").onclick = entryAdd;
+		entry.querySelector(".window__decline").onclick = hideEntryAdditionBox;
+	} else {
+		entry.querySelector(".window__entry-edit").onclick = entryEdit;
+		entry.querySelector(".window__entry-delete").onclick = entryDelete;
+	}
+	
+	return entry;
 }
