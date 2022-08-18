@@ -1,3 +1,3 @@
-# Mi página
+# Página personal + GTD
 
-Mi página xd.
+Poca explicación más se necesita.
