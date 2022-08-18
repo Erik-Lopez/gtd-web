@@ -60,8 +60,16 @@ function entryDelete(e) {
 	entryBox.remove();
 }
 
-function entryEdit(e) {
+function entryEditForButton(e) {
 	let entryBox = e.target.parentNode.parentNode;
+	entryEdit(entryBox);
+}
+function entryEditForTextBox(e) {
+	let entryBox = e.target.parentNode;
+	entryEdit(entryBox);
+}
+
+function entryEdit(entryBox) {
 	let panel = entryBox.parentNode;
 	let entryAdditionButton = panel.querySelector(".window__entry-create");
 	let content = entryBox.querySelector(".window__entry-content").innerHTML;
@@ -91,7 +99,7 @@ function entryCreate(innerHTML, editable=false) {
 	if (editable) {
 		content += `
 				<textarea class='window__input'>${innerHTML}</textarea>
-				<button class='window__accept'></button>
+				<button class='window__accept'>${getIcon("checkmark")}</button>
 				<button class='window__decline'></button>`;
 	} else {
 		content += `
@@ -110,9 +118,17 @@ function entryCreate(innerHTML, editable=false) {
 		entry.querySelector(".window__accept").onclick = entryAdd;
 		entry.querySelector(".window__decline").onclick = hideEntryAdditionBox;
 	} else {
-		entry.querySelector(".window__entry-edit").onclick = entryEdit;
+		entry.querySelector(".window__entry-content").onclick = entryEditForTextBox;
+		entry.querySelector(".window__entry-edit").onclick = entryEditForButton;
 		entry.querySelector(".window__entry-delete").onclick = entryDelete;
 	}
 	
 	return entry;
+}
+
+function getIcon(name, width, height) {
+	switch (name) {
+		case "checkmark":
+			return `<svg class="window__accept-icon" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1671 566q0 40-28 68l-724 724-136 136q-28 28-68 28t-68-28l-136-136-362-362q-28-28-28-68t28-68l136-136q28-28 68-28t68 28l294 295 656-657q28-28 68-28t68 28l136 136q28 28 28 68z" fill="#fff"/></svg>`
+	}
 }
