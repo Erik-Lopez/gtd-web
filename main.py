@@ -34,3 +34,11 @@ async def gtd():
     with open("./static/gtd.html", "r") as f:
         content = f.read()
         return HTMLResponse(content)
+
+@app.get(
+    path = "/discord",
+    response_class = HTMLResponse,
+    summary = "Discord contact page."
+)
+async def discord():
+    return HTMLResponse("<body style='font-family: Arial; font-size:3rem;'><p>Discord no permite crear invitaciones a perfiles así que te mando a esta página jasjtajst.</p><p>En fin, habla conmigo si quieres: <strong>Eriklf#4063</strong></p></body>")
