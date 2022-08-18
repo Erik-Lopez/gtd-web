@@ -102,7 +102,7 @@ function entryEdit(entryBox) {
 	let content = entryBox.querySelector(".window__entry-content").innerHTML;
 
 	let editableEntryBox = entryCreate(content, true);
-	panel.insertBefore(editableEntryBox, entryAdditionButton);
+	panel.insertBefore(editableEntryBox, entryBox);
 	entryBox.remove();
 }
 
