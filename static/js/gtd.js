@@ -22,6 +22,8 @@ function generatePage() {
 	pageHTMLContent += `
 		<div class="updown-buttons">
 			<button class="download-json-button">${getIcon("download")}</button>
+			<input class="upload-json-button upload-true" type="file" onchange="uploadJSON();"></input>
+			<button class="upload-json-button">${getIcon("upload")}</button>
 		</div>
 	</div>
 	`;
@@ -42,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		button.onclick = downloadJSON;
 	});
 	document.querySelectorAll(".upload-json-button").forEach(button => {
-		button.onclick = uploadJSON;
+		button.onclick = uploadJSON2;
 	});
 });
 
@@ -185,6 +187,8 @@ function getIcon(name, width, height) {
 			return `<svg class="window__close-button-icon" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M448 1472q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm644-420l-682 682q-37 37-90 37-52 0-91-37l-106-108q-38-36-38-90 0-53 38-91l681-681q39 98 114.5 173.5t173.5 114.5zm634-435q0 39-23 106-47 134-164.5 217.5t-258.5 83.5q-185 0-316.5-131.5t-131.5-316.5 131.5-316.5 316.5-131.5q58 0 121.5 16.5t107.5 46.5q16 11 16 28t-16 28l-293 169v224l193 107q5-3 79-48.5t135.5-81 70.5-35.5q15 0 23.5 10t8.5 25z" fill="#fff"/></svg>`;
 		case "download":
 			return `<svg class="download-json-button" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1344 1344q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm256 0q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm128-224v320q0 40-28 68t-68 28h-1472q-40 0-68-28t-28-68v-320q0-40 28-68t68-28h465l135 136q58 56 136 56t136-56l136-136h464q40 0 68 28t28 68zm-325-569q17 41-14 70l-448 448q-18 19-45 19t-45-19l-448-448q-31-29-14-70 17-39 59-39h256v-448q0-26 19-45t45-19h256q26 0 45 19t19 45v448h256q42 0 59 39z" fill="#fff"/></svg>`;
+		case "upload":
+			return `<svg class="upload-json-button" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M1344 1472q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm256 0q0-26-19-45t-45-19-45 19-19 45 19 45 45 19 45-19 19-45zm128-224v320q0 40-28 68t-68 28h-1472q-40 0-68-28t-28-68v-320q0-40 28-68t68-28h427q21 56 70.5 92t110.5 36h256q61 0 110.5-36t70.5-92h427q40 0 68 28t28 68zm-325-648q-17 40-59 40h-256v448q0 26-19 45t-45 19h-256q-26 0-45-19t-19-45v-448h-256q-42 0-59-40-17-39 14-69l448-448q18-19 45-19t45 19l448 448q31 30 14 69z" fill="#fff"/></svg>`;
 	}
 }
 
@@ -228,4 +232,26 @@ function downloadJSON() {
 	a.remove();
 }
 
-function uploadJSON() {}
+function uploadJSON() {
+	let [file] = document.querySelector(".upload-true").files;
+	let json;
+	var reader = new FileReader();
+
+	reader.addEventListener("load", () => { 
+		let data = reader.result; 
+		json = JSON.parse(data);
+
+		for (let windowName of Object.keys(json)) {
+			let panel = document.getElementById(windowName).querySelector(".window__panel");
+			let button = panel.children[0];
+			
+			for (let content of Object.values(json[windowName])) {
+				let entry = entryCreate(content, false);
+				panel.insertBefore(entry, button);
+			}
+
+		}
+	});
+	reader.readAsText(file);
+}
+function uploadJSON2() {}

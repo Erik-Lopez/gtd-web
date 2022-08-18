@@ -174,12 +174,12 @@ body {
 	width: 100%;
 }
 
-.download-json-button {
+.download-json-button, .upload-json-button {
 	background-color: transparent;
 	border: none;
 	cursor: pointer;
 }
 
-.download-json-button svg {
+.download-json-button svg, .upload-json-button svg {
 	width: 100px;
 }
