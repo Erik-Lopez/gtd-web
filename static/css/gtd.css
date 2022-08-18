@@ -118,6 +118,8 @@ body {
 
 .window__entry-content {
 	margin: 0;
+	max-width: 80%;
+	overflow: scroll;
 }
 
 .window__entry-delete {
@@ -125,20 +127,28 @@ body {
 	border-color: cyan;
 }
 
-.window__entry-edit {
-	background-color: cyan;
-	border-color: cyan;
-}
 
-.window__spacing {
+.window__entry-buttons {
 	display: flex;
-	flex-direction: row;
-	gap: 10%;
-	height: 100%;
+	flex-direction: column-reverse;
+	height: calc(100% + 2*10px);
 }
 
 .window__accept-icon, .window__decline-icon {
 	width: 20px;
 	height: 20px;
+}
+
+.window__accept-icon, .window__decline-icon, .window__entry-edit-icon, .window__entry-delete-icon {
+	height: 100%;
 	pointer-events: none;
+}
+
+.window__entry-edit, .window__entry-delete {
+	background-color: transparent;
+	border-color: transparent;
+	height: 50%;
+}
+.window__entry-edit-icon {
+
 }
