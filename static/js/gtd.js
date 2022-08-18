@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
 	document.querySelectorAll(".window__entry-create").forEach(button => {
 		button.onclick = showEntryAdditionBox;
 	});
-
 });
 
 function toggleWindowVisibility(e)
