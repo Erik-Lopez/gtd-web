@@ -93,6 +93,7 @@ body {
 .window__input {
 	border-style: none;
 	background-color: var(--light-color);
+	font-size: 2em;
 	width: 100%;
 }
 
@@ -120,6 +121,7 @@ body {
 	margin: 0;
 	max-width: 80%;
 	overflow: scroll;
+	font-size: 2em;
 }
 
 .window__entry-delete {
@@ -148,7 +150,4 @@ body {
 	background-color: transparent;
 	border-color: transparent;
 	height: 50%;
-}
-.window__entry-edit-icon {
-
 }
