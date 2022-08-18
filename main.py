@@ -1,3 +1,5 @@
+import uvicorn 
+
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -45,3 +47,6 @@ async def gtd():
 )
 async def discord():
     return HTMLResponse("<body style='font-family: Arial; font-size:3rem;'><p>Discord no permite crear invitaciones a perfiles así que te mando a esta página jasjtajst.</p><p>En fin, habla conmigo si quieres: <strong>Eriklf#4063</strong></p></body>")
+
+if __name__ == '__main__':
+    uvicorn.run('main:app', port=8001, host='0.0.0.0')
