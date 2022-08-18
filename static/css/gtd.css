@@ -101,14 +101,16 @@ body {
 	width: 40px;
 }
 
-.window__accept {
+.window__accept, .window__decline {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+}
+
+.window__accept {
 	background-color: lightgreen;
 	border-color: lightgreen;
 }
-
 .window__decline {
 	background-color: pink;
 	border-color: pink;
@@ -135,7 +137,7 @@ body {
 	height: 100%;
 }
 
-.window__accept-icon {
+.window__accept-icon, .window__decline-icon {
 	width: 20px;
 	height: 20px;
 	pointer-events: none;
