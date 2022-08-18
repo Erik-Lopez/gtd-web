@@ -71,7 +71,8 @@ body {
 	border-radius: var(--roundedness);
 	box-sizing: border-box;
 	width: inherit;
-	min-height: 50px;
+	min-height: fit-content;
+	min-height: -moz-fit-content;
 	padding: 10px;
 	display: flex;
 	flex-direction: row;
@@ -142,8 +143,8 @@ body {
 }
 
 .window__accept-icon, .window__decline-icon, .window__entry-edit-icon, .window__entry-delete-icon {
-	width: 100%;
-	height: 100%;
+	/*width: 100%;*/
+	/*height: 100%;*/
 	pointer-events: none;
 }
 
